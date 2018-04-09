@@ -1,15 +1,19 @@
 const { expect } = require('chai');
 
 describe('GET /order/:orderId', () => {
+  beforeEach(() => {
+    this.orderId = '<some order ID>';
+    this.orderURI = `${this.ordersBaseUri}/${encodeURIComponent(this.orderId)}`;
+  });
+
   context('The order exists', () => {
     beforeEach(() => {
+      console.log('beforeEach for will respond with 200');
       this.orderModel = {};
       this.orderSystem.display.withArgs(this.orderId).resolves(this.orderModel);
     });
 
-    it('will respond with a 200 code', () => {
-      expect(false).to.be.ok; // eslint-disable-line no-unused-expressions
-    });
+    it('will respond with a 200 code', () => expect(this.GET(this.orderURI)).to.have.property('status', 200));
 
     describe('will respond with a HAL document for the order', () => {
     });

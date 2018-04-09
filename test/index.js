@@ -6,6 +6,7 @@ let server;
 const port = process.env.PORT || 3000;
 
 before(async () => {
+  this.ordersBaseURI = '/orders';
   server = hapi.server({ host: 'localhost', port });
   console.log('Created the server');
   return server;
